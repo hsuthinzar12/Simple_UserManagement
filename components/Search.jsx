@@ -1,26 +1,35 @@
 import { redirect } from "next/navigation";
-import { Input, Button,Box, FormControl } from "@mui/material";
-import {Search} from "lucide-react"
-
+import { Input, Button, Box } from "@mui/material";
+import { Search } from "lucide-react";
 
 async function handleSearch(formData) {
-  "use server"; 
-  
+  "use server";
+
   const q = formData.get("q");
 
   if (q) {
-    redirect(`/search?q=${encodeURIComponent(q)}`);
+    redirect(`/search?q=${q}`);
   } else {
-    redirect("/"); 
+    redirect("/");
   }
 }
 
 export default function SearchUsr() {
   return (
     <Box>
-      <form action={handleSearch} className="items-center justify-center flex p-5">
-        <Input name="q" placeholder="Search" className="bg-white"/>
-        <Button type="submit" className="gap-4 border-l-rose-700">Search<Search size={20}/></Button>
+      <form
+        action={handleSearch}
+        className="flex items-center justify-center p-5"
+      >
+        <Input name="q" placeholder="Search" className="bg-white" />
+        <Button
+          type="submit"
+          variant="contained"
+          className="flex items-center gap-2 ml-2"
+        >
+          <Search size={20} />
+          Search
+        </Button>
       </form>
     </Box>
   );
